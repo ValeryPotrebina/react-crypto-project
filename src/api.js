@@ -1,7 +1,14 @@
 import {cryptoAssets, cryptoData} from './data.js';
 
+// const options = {
+//     method: 'GET',
+//     headers: {
+//     accept: 'application/json',
+//         'X-API-KEY': 'MjUMFoVRgb04+Vqf3HqeEOYAVj5mxgfIU0FI5Y1nSUQ='
+//     }
+// };
 
-
+// const url = 'https://openapiv1.coinstats.app/coins'
 
 // export async function FetchCrypto(url, options) {
 //     try {
@@ -20,15 +27,14 @@ export function FaceFetchCrypto() {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(cryptoData)
-        }, 100)
+        }, 500)
     })
 }
 
-// PBvUOusdd2hNGsbFr7LaS8rlGwPXHGzpOqHIS9Vlou4
 export function FetchAssets() {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(cryptoAssets)
-        }, 100)
+        }, 500)
     })
 }

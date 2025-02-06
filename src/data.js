@@ -628,4 +628,5 @@ export const cryptoAssets = [
     price: 0.039,
     date: new Date(),
   },
+  
 ]
