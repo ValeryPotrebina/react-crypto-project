@@ -1,4 +1,4 @@
-import {cryptoAssets, cryptoData} from './data.js';
+import {cryptoAssets} from './data.js';
 
 // const options = {
 //     method: 'GET',
@@ -10,18 +10,18 @@ import {cryptoAssets, cryptoData} from './data.js';
 
 // const url = 'https://openapiv1.coinstats.app/coins'
 
-// export async function FetchCrypto(url, options) {
-//     try {
-//         const response = await fetch(url, options);
-//         if (!response.ok) {
-//             throw new Error(`Error: ${response.status} - ${response.statusText}`);
-//           }
+export async function FetchCrypto(url, options) {
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+          }
 
-//         return await response.json();
-//     } catch(error) {
-//         console.error("Error:", error);
-//     }
-// }
+        return await response.json();
+    } catch(error) {
+        console.error("Error:", error);
+    }
+}
 
 export function FaceFetchCrypto() {
     return new Promise((resolve) => {

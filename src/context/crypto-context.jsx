@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { FetchAssets, FaceFetchCrypto } from "../api";
+import { FetchAssets, FetchCrypto } from "../api";
 import { percentDifference } from "../utils";
 
 const CryptoContext = createContext({
@@ -15,34 +15,43 @@ export function CryptoContextProvider({ children }) {
 
   function mapAssets(assets, result) {
     return assets.map((asset) => {
-        const coin = result.find((coin) => coin.id === asset.id);
-        return {
-          grow: asset.price < coin.price,
-          growPercent: percentDifference(asset.price, coin.price),
-          totalAmount: asset.amount * coin.price,
-          totalProfit: asset.amount * (coin.price - asset.price),
-          name: coin.name,
-          ...asset,
-        };
+      const coin = result.find((coin) => coin.id === asset.id);
+      return {
+        grow: asset.price < coin.price,
+        growPercent: percentDifference(asset.price, coin.price),
+        totalAmount: asset.amount * coin.price,
+        totalProfit: asset.amount * (coin.price - asset.price),
+        name: coin.name,
+        ...asset,
+      };
     });
   }
 
   useEffect(() => {
     async function preload() {
-        setLoading(true);
-        const response = await FaceFetchCrypto();
-        
-        if (!response || !response.result) {
-          console.error("Ошибка в ответе API: ", response);
-          setLoading(false);
-          return;
-        }
-        
-        const { result } = response;
-        const assets = await FetchAssets();
-        setAssets(mapAssets(assets, result));
-        setCrypto(result);
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "X-API-KEY": "MjUMFoVRgb04+Vqf3HqeEOYAVj5mxgfIU0FI5Y1nSUQ=",
+        },
+      };
+
+      const url = "https://openapiv1.coinstats.app/coins";
+      setLoading(true);
+      const response = await FetchCrypto(url, options);
+
+      if (!response || !response.result) {
+        console.error("Ошибка в ответе API: ", response);
         setLoading(false);
+        return;
+      }
+
+      const { result } = response;
+      const assets = await FetchAssets();
+      setAssets(mapAssets(assets, result));
+      setCrypto(result);
+      setLoading(false);
     }
     preload();
   }, []);
