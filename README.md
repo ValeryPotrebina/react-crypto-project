@@ -15,3 +15,8 @@ npm run dev
 https://react-chartjs-2.js.org/components/pie
 4. data about current crypto currency is here https://docs.api.coinstats.app/reference/market-data
 You need to create your own API Key
+
+
+TODO LIST 
+1. Переставлять блоки слева
+2. Аутенфикация
